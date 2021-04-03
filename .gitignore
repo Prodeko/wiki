@@ -1,0 +1,4 @@
+env.minio
+env.outline
+data/*
+!data/nginx/*

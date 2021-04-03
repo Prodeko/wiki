@@ -1,0 +1,32 @@
+version: "3"
+services:
+  wiki_redis:
+    image: redis
+    container_name: wiki_redis
+    restart: always
+
+  wiki_minio:
+    image: minio/minio
+    container_name: wiki_minio
+    volumes:
+      - ./data/minio_root:/minio_root:z
+    command: "minio gateway azure"
+    env_file: ./env.minio
+    restart: always
+
+  wiki_outline:
+    image: outlinewiki/outline:latest
+    container_name: wiki_outline
+    command: sh -c "yarn sequelize:migrate && yarn start"
+    environment:
+      - REDIS_URL=redis://wiki_redis:6379
+    env_file: ./env.outline
+    restart: always
+    depends_on:
+      - wiki_redis
+      - wiki_minio
+
+networks:
+  default:
+    external:
+      name: prodeko-docker-net
