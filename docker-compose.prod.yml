@@ -17,7 +17,7 @@ services:
   wiki_outline:
     image: outlinewiki/outline:latest
     container_name: wiki_outline
-    command: sh -c "yarn sequelize:migrate && yarn start"
+    command: sh -c "yarn sequelize:migrate --env production-ssl-disabled && yarn start"
     environment:
       - REDIS_URL=redis://wiki_redis:6379
     env_file: ./env.outline
