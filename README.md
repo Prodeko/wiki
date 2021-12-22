@@ -24,4 +24,4 @@ Deploy to production:
 
 - Create an Oauth client in Google Cloud Platform (https://console.cloud.google.com/apis/credentials)
 - Configure env variables in https://github.com/Prodeko/infrastructure/tree/master/ansible/roles/ansible-prodeko-services/files/srv/www/wiki
-- Deploy by running `ansible-playbook playbook.yml --extra-vars '@passwd.yml' --tags wiki` in the infrastructure repo
+- Deploy by running `ansible-playbook playbook.yml --extra-vars '@passwd.yml' --tags wiki --limit prodeko-azure-vm` in the infrastructure repo
